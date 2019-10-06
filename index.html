@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=11' />
+    <title>Docbox</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='css/base.css' rel='stylesheet' />
+    <link href='css/style.css' rel='stylesheet' />
+    <link href='css/railscasts.css' rel='stylesheet' />
+  </head>
+  <body>
+    <!--START--><div id='app'><div class="container unlimiter" data-reactroot="" data-reactid="1" data-react-checksum="-507687620"><div class="fixed-top fixed-right space-left16" data-reactid="2"><div class="fill-light col6 pin-right" data-reactid="3"></div></div><div class="space-top5 scroll-styled overflow-auto pad1 width16 sidebar fixed-left fill-dark dark" data-reactid="4"><div class="pad0x small" data-reactid="5"><div class="small pad0x quiet space-top1" data-reactid="6">Basic Configurations</div><a href="#about-project" class="line-height15 pad0x pad00y quiet block " data-reactid="7">About Project</a><a href="#preparations" class="line-height15 pad0x pad00y quiet block " data-reactid="8">Preparations</a><a href="#configurations" class="line-height15 pad0x pad00y quiet block " data-reactid="9">Configurations</a><div class="small pad0x quiet space-top1" data-reactid="10">Our API</div><a href="#customers" class="line-height15 pad0x pad00y quiet block " data-reactid="11">Customers</a><a href="#catalog" class="line-height15 pad0x pad00y quiet block " data-reactid="12">Catalog</a></div></div><div class="space-left16" data-reactid="13"><div class="" data-reactid="14"><div class="clearfix" data-reactid="15"><div data-title="About Project" class="keyline-top section contain clearfix " data-reactid="16"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="17"><h2 id="about-project">About Project</h2>
+<p>Welcome to <strong><a href="https://dan-it.com.ua/">DAN.IT Education</a></strong>.</p>
+<p>This documentation is about Node.js API for Front End course to use in Final Project for creating ECommerce-Store.</p>
+<p>Here you will find everything about project basic configurations and about how to use endpoints for managing content of your online-store.</p>
+<p>Thus, you will have the opportunity to concentrate on implementing the front-end part and use the ready-made backend code.</p>
+<p>Lets start.</p>
+</div></div><div data-title="Preparations" class="keyline-top section contain clearfix " data-reactid="18"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="19"><h2 id="preparations">Preparations</h2>
+<p>Every team have to create their own git repository for Final Project and copy to it ready-made backend code.
+To do this, you (one person from team) can go through the following steps:</p>
+<ol>
+<li>
+<p>Create your repository on <a href="https://github.com/">Github</a></p>
+</li>
+<li>
+<p>Clone it to any convenient folder, where you will work with project.</p>
+</li>
+<li>
+<p>Download and unzip backend part from <a href="https://gitlab.com/dan-it/js-course-development/fe-final-backend">Here</a></p>
+</li>
+<li>
+<p>Copy all nested folders and files to your project so that <code>package.json</code> file from backend will be in project root folder.</p>
+</li>
+<li>
+<p>Install dependencies in your project folder: <code>npm install</code></p>
+<p>You will see something like this:
+<img src="images/file_structure.png" alt="File structure" title="File structure"></p>
+</li>
+<li>
+<p>Create within your project's root folder a new folder named <code>client</code> using <code>create-react-app</code>.
+In this folder will write all frontend code.</p>
+</li>
+<li>
+<p>Push all changes (file structure) to git.</p>
+</li>
+</ol>
+</div></div><div data-title="Configurations" class="keyline-top section contain clearfix " data-reactid="20"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="21"><h2 id="configurations">Configurations</h2>
+<p>At backend side you some personal accounts to access different systems.
+For this reason you must (one person from project) create needed accounts and configure credentials in appropriate files according to steps below:</p>
+<ol>
+<li>
+<p>Create account for accessing MongoDB at <strong><a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a></strong></p>
+</li>
+<li>
+<p>Create there your Database.</p>
+</li>
+<li>
+<p>Configure DB Credentials in backend files:</p>
+<ul>
+<li>mongoURI in <code>config\keys_dev.js</code></li>
+<li>MONGO_URI in <code>.env</code></li>
+</ul>
+</li>
+<li>
+<p>Create or use existing gmail-account for your online-store mailing. This will be used for sending to customers's email information about placed orders and subsribes.</p>
+</li>
+<li>
+<p>Configure credentials for mailing in <code>config\keys_dev.js</code> and <code>.env</code>:</p>
+<ul>
+<li><code>nodemailerUser</code> is an email address;</li>
+<li><code>nodemailerPassword</code> is the actual password for that email address;</li>
+</ul>
+</li>
+</ol>
+<p>That is all.</p>
+<p>If ure are familiar with Node.js - you can modify code if it will be necessary during Final Project making.</p>
+</div></div><div data-title="Customers" class="keyline-top section contain clearfix " data-reactid="22"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="23"><h2 id="customers">Customers</h2>
+<p>We have endpoints for:</p>
+<ul>
+<li>Create new customer (register);</li>
+<li>Log in;</li>
+<li>Get customer;</li>
+<li>Update existing customer (edit customer's data);</li>
+<li>Update (change) customers password.</li>
+</ul>
+</div></div><div data-title="Create new customer (register)" class="keyline-top section contain clearfix " data-reactid="24"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="25"><h3 id="create-new-customer-register">Create new customer (register)</h3>
+<p>For creating new customer you have to pass next parameters when making request to the server's appropriate endpoint:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Data type</th>
+<th>Generated</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>customerNo</code></td>
+<td>required</td>
+<td>String</td>
+<td>by system</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>firstName</code></td>
+<td>required</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>lastName</code></td>
+<td>required</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>login</code></td>
+<td>required</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>required</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>required</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>isAdmin</code></td>
+<td>required</td>
+<td>Boolean</td>
+<td>by system</td>
+<td>default <code>false</code></td>
+</tr>
+<tr>
+<td><code>enabled</code></td>
+<td>required</td>
+<td>Boolean</td>
+<td>by system</td>
+<td>default <code>true</code></td>
+</tr>
+<tr>
+<td><code>telephone</code></td>
+<td>optional</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>birthdate</code></td>
+<td>optional</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>gender</code></td>
+<td>optional</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>avatarUrl</code></td>
+<td>optional</td>
+<td>String</td>
+<td>by user</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>optional</td>
+<td>Date</td>
+<td>by system</td>
+<td>default <code>Date.now()</code></td>
+</tr>
+</tbody>
+</table>
+<p>You can also add your own custom parameters to save in database if you want.
+Passing custom parameters can help you with implementing some custom functionality or logic if necessary.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="26"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>POST</div>
+      <div class='pad0 code small endpoint-url'>/customers</div>
+    </div>
+<h4 id="example-request">Example request</h4>
+<pre class='hljs'><span class="hljs-keyword">const</span> newCustomer = {
+	<span class="hljs-attr">firstName</span>: <span class="hljs-string">"Customer"</span>,
+	<span class="hljs-attr">lastName</span>: <span class="hljs-string">"Newone"</span>,
+	<span class="hljs-attr">login</span>: <span class="hljs-string">"Customer"</span>,
+	<span class="hljs-attr">email</span>: <span class="hljs-string">"customer@gmail.com"</span>,
+	<span class="hljs-attr">password</span>: <span class="hljs-string">"1111111"</span>,
+	<span class="hljs-attr">telephone</span>: <span class="hljs-string">"+380630000000"</span>,
+	<span class="hljs-attr">gender</span>: <span class="hljs-string">"male"</span>,
+	<span class="hljs-attr">avatarUrl</span>: <span class="hljs-string">"img/customers/023648.png"</span>,
+	<span class="hljs-attr">isAdmin</span>: <span class="hljs-literal">true</span>
+},
+
+axios.post(<span class="hljs-string">"/customers"</span>, newCustomer)
+	.then(<span class="hljs-function"><span class="hljs-params">savedCustomer</span> =&gt;</span> {<span class="hljs-comment">/*Do something with customer*/</span>})
+	.catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {<span class="hljs-comment">/*Do something with error, e.g. show error to customer*/</span>})</pre>
+<h4 id="example-response">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"isAdmin"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"enabled"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99d2532cd5241c40fc9008"</span>,
+  <span class="hljs-attr">"firstName"</span>: <span class="hljs-string">"Customer"</span>,
+  <span class="hljs-attr">"lastName"</span>: <span class="hljs-string">"Newone"</span>,
+  <span class="hljs-attr">"login"</span>: <span class="hljs-string">"Customer"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"customer@gmail.com"</span>,
+  <span class="hljs-attr">"password"</span>: <span class="hljs-string">"$2a$10$XTXkPWN3zJufG9S3NATZyeeuoVOwvrzqopfdqYwbUQidCZHp/aTYS"</span>,
+  <span class="hljs-attr">"telephone"</span>: <span class="hljs-string">"+380630000000"</span>,
+  <span class="hljs-attr">"gender"</span>: <span class="hljs-string">"male"</span>,
+  <span class="hljs-attr">"avatarUrl"</span>: <span class="hljs-string">"img/customers/023648.png"</span>,
+  <span class="hljs-attr">"customerNo"</span>: <span class="hljs-string">"27314974"</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T11:38:59.470Z"</span>,
+  <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+}</pre>
+</div></div><div data-title="Login" class="keyline-top section contain clearfix " data-reactid="27"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="28"><h3 id="login">Login</h3>
+<p>Log into store.
+For login process customer can use his email address or login.</p>
+<p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loginOrEmail</code></td>
+<td>required</td>
+<td>String</td>
+<td>email or login</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>required</td>
+<td>String</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>You will receive back jwt-token and can use it for checking expire date, loggedin status etc.
+For example, you can save token in local storage and then use <code>jwt-decode</code> module for decoding jwt and checking if it has expiration or not, logout etc.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="29"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>POST</div>
+      <div class='pad0 code small endpoint-url'>/customers/login</div>
+    </div>
+<h4 id="example-request-1">Example request</h4>
+<pre class='hljs'><span class="hljs-keyword">const</span> userData = {
+  <span class="hljs-attr">loginOrEmail</span>: <span class="hljs-string">"customer@gmail.com"</span>,
+  <span class="hljs-attr">password</span>: <span class="hljs-string">"1111111"</span>
+};
+
+axios
+  .post(<span class="hljs-string">"/customers/login"</span>, userData)
+  .then(<span class="hljs-function"><span class="hljs-params">loginResult</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with jwt-token if login successed*/</span>
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-comment">/*Show error to customer, may be incorrect password or something else*/</span>
+  });</pre>
+<h4 id="example-response-1">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"token"</span>: <span class="hljs-string">"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkOTljZTE5NmQ0MGZiMWI3NDdiYzVmNSIsImZpcnN0TmFtZSI6IkN1c3RvbWVyIiwibGFzdE5hbWUiOiJOZXdvbmUiLCJpYXQiOjE1NzAzNjU0ODIsImV4cCI6MTU3MDM2OTA4Mn0._arHw0HC2uLsH6Ow0LJEeuaj03S4dB9x--yfp5Kj_r0"</span>
+}</pre>
+</div></div><div data-title="Get customer" class="keyline-top section contain clearfix " data-reactid="30"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="31"><h3 id="get-customer">Get customer</h3>
+<p>Get current customer's data.
+We are talking about a customer who is logged into the system (not any customer by id).
+There are different endpoints that require user authorization.
+If endpoint is available only for authorizied users, you have to provide appropriate Header for axios request.
+You can provide some universal function, that will handle it. For example:</p>
+<pre><code>import axios from 'axios';
+
+const setAuthToken = token => {
+  if (token) {
+    // Apply to every request
+    axios.defaults.headers.common['Authorization'] = token;
+  } else {
+    // Delete auth header
+    delete axios.defaults.headers.common['Authorization'];
+  }
+};
+
+export default setAuthToken;
+</code></pre>
+<p>And then you can use <code>setAuthToken</code> function to set toket to header if user is logged in and delete toket when user logged out.</p>
+<p>For example, if user is successfully logged in via <code>/customers/login</code> endpoint you can invoke <code>setAuthToken(token)</code>.
+Othervise, when token is expired or user logged out by himself - invoke <code>setAuthToken(false)</code>;</p>
+<p>If you do not want to receive password or other parameters of customer, you can make changes to <code>getCustomer</code> controller function in file <code>controllers\customers.js</code> (return to client a set of particular parameters).</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="32"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>GET</div>
+      <div class='pad0 code small endpoint-url'>/customers/customer</div>
+    </div>
+<h4 id="example-request-2">Example request</h4>
+<pre class='hljs'>axios
+  .get(<span class="hljs-string">"/customers/customer"</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">loggedInCustomer</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with loggedInCustomer*/</span>
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with error */</span>
+  });</pre>
+<h4 id="example-response-2">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"isAdmin"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"enabled"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99ce196d40fb1b747bc5f5"</span>,
+  <span class="hljs-attr">"firstName"</span>: <span class="hljs-string">"Customer"</span>,
+  <span class="hljs-attr">"lastName"</span>: <span class="hljs-string">"Newone"</span>,
+  <span class="hljs-attr">"login"</span>: <span class="hljs-string">"Customer"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"customer@gmail.com"</span>,
+  <span class="hljs-attr">"password"</span>: <span class="hljs-string">"$2a$10$1O/2caDJkzqCYIpBDwMJteUtv.A4PBKFip9YY5WHjZTLwTodxLQcy"</span>,
+  <span class="hljs-attr">"telephone"</span>: <span class="hljs-string">"+380630000000"</span>,
+  <span class="hljs-attr">"gender"</span>: <span class="hljs-string">"male"</span>,
+  <span class="hljs-attr">"avatarUrl"</span>: <span class="hljs-string">"img/customers/023648.png"</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T11:20:57.544Z"</span>,
+  <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+}</pre>
+</div></div><div data-title="Update customer" class="keyline-top section contain clearfix " data-reactid="33"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="34"><h3 id="update-customer">Update customer</h3>
+<p>Endpoint for updating customer is similar to endpoint of creating of new customer.
+You can pass only those parameters, that have to be changed.</p>
+<p>You can also add your own custom parameters to save additionally in database if you want implemet some custom logic / functionallity.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="35"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>PUT</div>
+      <div class='pad0 code small endpoint-url'>/customers</div>
+    </div>
+<h4 id="example-request-3">Example request</h4>
+<pre class='hljs'><span class="hljs-keyword">const</span> updatedCustomer = {
+	<span class="hljs-attr">firstName</span>: <span class="hljs-string">"John"</span>,
+	<span class="hljs-attr">lastName</span>: <span class="hljs-string">"Doe"</span>,
+	<span class="hljs-attr">login</span>: <span class="hljs-string">"jDoe"</span>,
+	<span class="hljs-attr">email</span>: <span class="hljs-string">"jDoe@gmail.com"</span>
+},
+
+axios.put(<span class="hljs-string">"/customers"</span>, updatedCustomer)
+	.then(<span class="hljs-function"><span class="hljs-params">updatedCustomer</span> =&gt;</span> {<span class="hljs-comment">/*Do something with customer*/</span>})
+	.catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {<span class="hljs-comment">/*Do something with error, e.g. show error to customer*/</span>})</pre>
+<h4 id="example-response-3">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"isAdmin"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"enabled"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99d2532cd5241c40fc9008"</span>,
+  <span class="hljs-attr">"firstName"</span>: <span class="hljs-string">"John"</span>,
+  <span class="hljs-attr">"lastName"</span>: <span class="hljs-string">"Doe"</span>,
+  <span class="hljs-attr">"login"</span>: <span class="hljs-string">"jDoe"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"jDoe@gmail.com"</span>,
+  <span class="hljs-attr">"password"</span>: <span class="hljs-string">"$2a$10$XTXkPWN3zJufG9S3NATZyeeuoVOwvrzqopfdqYwbUQidCZHp/aTYS"</span>,
+  <span class="hljs-attr">"telephone"</span>: <span class="hljs-string">"+380630000000"</span>,
+  <span class="hljs-attr">"gender"</span>: <span class="hljs-string">"male"</span>,
+  <span class="hljs-attr">"avatarUrl"</span>: <span class="hljs-string">"img/customers/023648.png"</span>,
+  <span class="hljs-attr">"customerNo"</span>: <span class="hljs-string">"27314974"</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T11:38:59.470Z"</span>,
+  <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+}</pre>
+</div></div><div data-title="Change password" class="keyline-top section contain clearfix " data-reactid="36"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="37"><h3 id="change-password">Change password</h3>
+<p>Endpoint for changing customers password.</p>
+<p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>password</code></td>
+<td>required</td>
+<td>String</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>newPassword</code></td>
+<td>required</td>
+<td>String</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="38"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>PUT</div>
+      <div class='pad0 code small endpoint-url'>/customers/password</div>
+    </div>
+<h4 id="example-request-4">Example request</h4>
+<pre class='hljs'><span class="hljs-keyword">const</span> passwords = {
+	<span class="hljs-string">"password"</span>: <span class="hljs-string">"1111111"</span>,
+	<span class="hljs-string">"newPassword"</span>: <span class="hljs-string">"2222222"</span>
+},
+
+axios.put(<span class="hljs-string">"/customers/password"</span>, passwords)
+	.then(<span class="hljs-function"><span class="hljs-params">updatedCustomer</span> =&gt;</span> {<span class="hljs-comment">/*Do something with customer, show info about update*/</span>})
+	.catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {<span class="hljs-comment">/*Do something with error, e.g. show error to customer*/</span>})</pre>
+<h4 id="example-response-4">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Password successfully changed"</span>,
+  <span class="hljs-attr">"customer"</span>: {
+    <span class="hljs-attr">"isAdmin"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"enabled"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99ce196d40fb1b747bc5f5"</span>,
+    <span class="hljs-attr">"firstName"</span>: <span class="hljs-string">"Customer"</span>,
+    <span class="hljs-attr">"lastName"</span>: <span class="hljs-string">"Newone"</span>,
+    <span class="hljs-attr">"login"</span>: <span class="hljs-string">"Customer"</span>,
+    <span class="hljs-attr">"email"</span>: <span class="hljs-string">"customer@gmail.com"</span>,
+    <span class="hljs-attr">"password"</span>: <span class="hljs-string">"$2a$10$c4aXjoQfb5X3e4a2wZ.L0.mv0V/a3kXbV7oW6FxanCQDYcOOId10m"</span>,
+    <span class="hljs-attr">"telephone"</span>: <span class="hljs-string">"+380630000000"</span>,
+    <span class="hljs-attr">"gender"</span>: <span class="hljs-string">"male"</span>,
+    <span class="hljs-attr">"avatarUrl"</span>: <span class="hljs-string">"img/customers/023648.png"</span>,
+    <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T11:20:57.544Z"</span>,
+    <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+  }
+}</pre>
+</div></div><div data-title="Catalog" class="keyline-top section contain clearfix " data-reactid="39"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="40"><h2 id="catalog">Catalog</h2>
+<p>In ECommerce Store you will have different products. <br />
+Products can be assined to a particular category. <br />
+The set of categories, that have heirarchical bindings is called "Catalog". <br />
+The catalog is a collection in which each object has the following form: <br /></p>
+<pre><code>{
+  "_id": "5d6a8385ff10dc0af0c90e5c",
+  "id": "men-clothing-suits",
+  "name": "suits",
+  "parentId": "men-clothing",
+  "__v": 0,
+  "date": "2019-10-06T13:50:11.859Z"
+}
+</code></pre>
+<p><code>parentId</code> - is the id of parent category. <br />
+If some category has highest level of hierarchy and has not parent canegory, then the <code>parentId</code> should be <code>'null'</code> (String).</p>
+<p>Using <code>parentId</code> parameter, you can create catalog-tree or some other data-structure for iterating through it in frontend code to show categories in navigation menu and / or in filter bar etc.</p>
+<p>We have endpoints to:</p>
+<ul>
+<li>Add new category into the catalog;</li>
+<li>Edit specific category in the catalog;</li>
+<li>Get catalog;</li>
+<li>Get specific category from catalog;</li>
+<li>Delete specific category from catalog.</li>
+</ul>
+</div></div><div data-title="Add new category to Catalog" class="keyline-top section contain clearfix " data-reactid="41"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="42"><h3 id="add-new-category-to-catalog">Add new category to Catalog</h3>
+<p>For adding new category use next set of parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Data type</th>
+<th>Generated</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>String</td>
+<td>by user</td>
+<td>Your custom id</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>required</td>
+<td>String</td>
+<td>by user</td>
+<td>Name of category to show on store interface</td>
+</tr>
+<tr>
+<td><code>parentId</code></td>
+<td>required</td>
+<td>String</td>
+<td>by user</td>
+<td>Id of the <strong>parent</strong> category</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>optional</td>
+<td>Date</td>
+<td>by system</td>
+<td>default <code>Date.now()</code></td>
+</tr>
+</tbody>
+</table>
+<p>You can also pass your custom parameters. <br />
+For example, category imgUrl or some description if you want on store show additional information about category.
+Even a level of nesting if it will reduce the complexity of using received data from DB. <br />
+<strong>Important</strong>: <code>id</code> parameter (your custom id) is non-changable. At first you have to define the id-naming logic for your categories and then add categories to DB. If something was saved wrong - you can change it in DB directly.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="43"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>POST</div>
+      <div class='pad0 code small endpoint-url'>/catalog</div>
+    </div>
+<h4 id="example-request-5">Example request</h4>
+<pre class='hljs'><span class="hljs-comment">// high level category</span>
+
+<span class="hljs-keyword">const</span> newCategory = {
+  <span class="hljs-attr">id</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">parentId</span>: <span class="hljs-string">"null"</span>,
+  <span class="hljs-attr">imgUrl</span>: <span class="hljs-string">"img/catalog/women.png"</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">"A category, that represents products for women"</span>,
+  <span class="hljs-attr">level</span>: <span class="hljs-number">0</span>
+};
+
+axios
+  .post(<span class="hljs-string">"/catalog"</span>, newCategory)
+  .then(<span class="hljs-function"><span class="hljs-params">newCategory</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with newCategory*/</span>
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with error, e.g. show error to user*/</span>
+  });
+
+<span class="hljs-comment">// Child category</span>
+
+<span class="hljs-keyword">const</span> newCategory = {
+  <span class="hljs-attr">id</span>: <span class="hljs-string">"women-shoes"</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"shoes"</span>,
+  <span class="hljs-attr">parentId</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">imgUrl</span>: <span class="hljs-string">"img/catalog/women-shoes.png"</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">"A category, that represents shoes for women"</span>,
+  <span class="hljs-attr">level</span>: <span class="hljs-number">1</span>
+};
+
+axios
+  .post(<span class="hljs-string">"/catalog"</span>, newCategory)
+  .then(<span class="hljs-function"><span class="hljs-params">newCategory</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with newCategory*/</span>
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with error, e.g. show error to user*/</span>
+  });</pre>
+<h4 id="example-response-5">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99f68e419d040eec0f722c"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">"parentId"</span>: <span class="hljs-string">"null"</span>,
+  <span class="hljs-attr">"imgUrl"</span>: <span class="hljs-string">"img/catalog/women.png"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A category, that represents products for women"</span>,
+  <span class="hljs-attr">"level"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T14:13:34.304Z"</span>,
+  <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+}</pre>
+<pre class='hljs'>{
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99f77d419d040eec0f722d"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"women-shoes"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"shoes"</span>,
+  <span class="hljs-attr">"parentId"</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">"imgUrl"</span>: <span class="hljs-string">"img/catalog/women-shoes.png"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A category, that represents shoes for women"</span>,
+  <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T14:17:33.743Z"</span>,
+  <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+}</pre>
+</div></div><div data-title="Update category" class="keyline-top section contain clearfix " data-reactid="44"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="45"><h3 id="update-category">Update category</h3>
+<p>This endpoint is for editing data of existing category.
+For finding partiular category for editing it's <code>id</code> is used.
+Pass parameters that you wand to add or edit.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="46"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>PUT</div>
+      <div class='pad0 code small endpoint-url'>/catalog/<span class="strong">{id}</span></div>
+    </div>
+<h4 id="example-request-6">Example request</h4>
+<pre class='hljs'><span class="hljs-keyword">const</span> updatedCategory = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"SHOES"</span>,
+  <span class="hljs-attr">description</span>:
+    <span class="hljs-string">"A category, that represents beautifull branded shoes for women. A цide range of products."</span>
+};
+
+axios
+  .put(<span class="hljs-string">"/catalog/women-shoes"</span>, updatedCategory)
+  .then(<span class="hljs-function"><span class="hljs-params">updatedCategory</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with updatedCategory*/</span>
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with error, e.g. show error to user*/</span>
+  });</pre>
+<h4 id="example-response-6">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99f77d419d040eec0f722d"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"women-shoes"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"SHOES"</span>,
+  <span class="hljs-attr">"parentId"</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">"imgUrl"</span>: <span class="hljs-string">"img/catalog/women-shoes.png"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A category, that represents beautifull branded shoes for women. A цide range of products."</span>,
+  <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T14:17:33.743Z"</span>,
+  <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+}</pre>
+</div></div><div data-title="Get catalog" class="keyline-top section contain clearfix " data-reactid="47"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="48"><h3 id="get-catalog">Get catalog</h3>
+<p>This endpoint is for geting the whole catalog (all categories).</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="49"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>GET</div>
+      <div class='pad0 code small endpoint-url'>/catalog</div>
+    </div>
+<h4 id="example-request-7">Example request</h4>
+<pre class='hljs'>axios
+  .get(<span class="hljs-string">"/catalog"</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">catalog</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with catalog*/</span>
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with error, e.g. show error to user*/</span>
+  });</pre>
+<h4 id="example-response-7">Example response</h4>
+<pre class='hljs'>[
+  {
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99f68e419d040eec0f722c"</span>,
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"women"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"women"</span>,
+    <span class="hljs-attr">"parentId"</span>: <span class="hljs-string">"null"</span>,
+    <span class="hljs-attr">"imgUrl"</span>: <span class="hljs-string">"img/catalog/women.png"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A category, that represents products for women"</span>,
+    <span class="hljs-attr">"level"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T14:13:34.304Z"</span>,
+    <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+  },
+  {
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99f77d419d040eec0f722d"</span>,
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"women-shoes"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"SHOES"</span>,
+    <span class="hljs-attr">"parentId"</span>: <span class="hljs-string">"women"</span>,
+    <span class="hljs-attr">"imgUrl"</span>: <span class="hljs-string">"img/catalog/women-shoes.png"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A category, that represents beautifull branded shoes for women. A цide range of products."</span>,
+    <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T14:17:33.743Z"</span>,
+    <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+  }
+]</pre>
+</div></div><div data-title="Get category" class="keyline-top section contain clearfix " data-reactid="50"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="51"><h3 id="get-category">Get category</h3>
+<p>This endpoint is for geting one spesific category by it's custom id.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="52"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>GET</div>
+      <div class='pad0 code small endpoint-url'>/catalog/<span class="strong">{id}</span></div>
+    </div>
+<h4 id="example-request-8">Example request</h4>
+<pre class='hljs'>axios
+  .get(<span class="hljs-string">"/catalog/women"</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">category</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with category*/</span>
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with error, e.g. show error to user*/</span>
+  });</pre>
+<h4 id="example-response-8">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99f68e419d040eec0f722c"</span>,
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"women"</span>,
+  <span class="hljs-attr">"parentId"</span>: <span class="hljs-string">"null"</span>,
+  <span class="hljs-attr">"imgUrl"</span>: <span class="hljs-string">"img/catalog/women.png"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A category, that represents products for women"</span>,
+  <span class="hljs-attr">"level"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T14:13:34.304Z"</span>,
+  <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+}</pre>
+</div></div><div data-title="Delete category" class="keyline-top section contain clearfix " data-reactid="53"><div class="space-bottom8 col6 pad2x prose clip" data-reactid="54"><h3 id="delete-category">Delete category</h3>
+<p>This endpoint is for deleting existing category.
+For finding spesific category for deleting from DB you must use category's custom id.</p>
+<p>Be careful, when deleting category from catalog, as it can have bindings. <br />
+For example, you can accidentally delete parent category and as a result all it's child categories (if such exists) will have incorrect binding in <code>parentId</code> as that parent category will already be deleted. <br />
+There are not any validations on server for such cases.</p>
+</div><div class="space-bottom4 col6 pad2 prose clip fill-light space-top5" data-reactid="55"><div class='endpoint dark fill-dark round '>
+      <div class='round-left pad0y pad1x fill-lighten0 code small endpoint-method'>DELETE</div>
+      <div class='pad0 code small endpoint-url'>/catalog/<span class="strong">{id}</span></div>
+    </div>
+<h4 id="example-request-9">Example request</h4>
+<pre class='hljs'>axios
+  .delete(<span class="hljs-string">"/catalog/women-shoes"</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with result*/</span>
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-comment">/*Do something with error, e.g. show error to user*/</span>
+  });</pre>
+<h4 id="example-response-9">Example response</h4>
+<pre class='hljs'>{
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Category witn id \"women-shoes\" is successfully deleted from DB."</span>,
+  <span class="hljs-attr">"deletedCategoryInfo"</span>: {
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5d99f77d419d040eec0f722d"</span>,
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"women-shoes"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"SHOES"</span>,
+    <span class="hljs-attr">"parentId"</span>: <span class="hljs-string">"women"</span>,
+    <span class="hljs-attr">"imgUrl"</span>: <span class="hljs-string">"img/catalog/women-shoes.png"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A category, that represents beautifull branded shoes for women. A цide range of products."</span>,
+    <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2019-10-06T14:17:33.743Z"</span>,
+    <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>
+  }
+}</pre>
+</div></div></div></div></div><div class="fixed-top space-left16" data-reactid="56"><div class="events fill-light bottom-shadow pad1 col6 pin-topright  " data-reactid="57"><div class="space-right1 small quiet inline" data-reactid="58">Show examples in:</div><div class="rounded-toggle inline short" data-reactid="59"><a class="strong active" data-reactid="60">JS</a></div><div class="fr pad0" data-reactid="61"><a title="Display as 1 column" style="cursor:pointer;" class="icon quiet caret-left pad0 fill-darken0 round" data-reactid="62"></a></div></div></div><div class="fill-dark dark bottom-shadow fixed-top pad0 width16" data-reactid="63"><a href="/" class="active space-top1 space-left1 pin-topleft icon round dark pad0 fill-blue" data-reactid="64"></a><div class="strong small pad0
+          
+          space-left4 line-height15" data-reactid="65">DAN.IT API Documentation</div></div></div></div><!--STOP-->
+    <script src='bundle.js'></script>
+  </body>
+</html>
